@@ -18,8 +18,24 @@ var repository= [
 ];
 
 for (var i = 0; i < repository.length; i++) {
+  var pokemonHeight = repository[i].height;
+  var tallestPokemon = Math.max(pokemonHeight);
+
   document.write('<br>' + repository[i].name  + ' ' +  'Height: ' + repository[i].height);
-  if(repository[i].height > 2) {
-    document.write(' - Wow, that\'s big!');
+
+  if (tallestPokemon) {
+    document.write('-Wow, that\'s tall!');
   }
 }
+
+
+
+
+
+ // I have to list all of the pokemons. THen I want to find the tallestPokemon and once I find it, I want to add a string to it. I think I need to use math.max and then the .push method.
+
+
+// var tallestPokemon =
+//   if(tallestPokemon) {
+//     repository[i].height.push(' -Wow, that\'s big!')
+//   }
