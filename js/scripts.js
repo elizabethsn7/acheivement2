@@ -16,12 +16,7 @@ var repository = [{
   }
 ];
 
-for (var i = 0; i < repository.length; i++) {
-  var pokeName = repository[i].name;
-  var pokeHeight = repository[i].height;
-  document.write('<br>' + pokeName + ' ' + ' (' +  'Height : ' + pokeHeight +  ')');
-
-  if(pokeHeight> 2) {
-    document.write(' - Wow, that\'s big!');
-  }
-}
+//This is working correctly in the console
+repository.forEach(function(properties) {
+  console.log(properties);
+})
