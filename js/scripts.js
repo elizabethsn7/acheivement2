@@ -28,18 +28,18 @@ var pokemonRepository = (function() {
   function getAll() {
     return repository;
   }
+
+// Bonus Task using .filter () method
+var filterName = repository.filter(function(names) {
+  return names.name === 'Squirtle'
+});
+console.log(filterName);
+
   // Return an object with public funtions assigned as keys
   return {
     add: add,
     getAll: getAll
   };
-
-  // Attempting Bonus ro no Avail...
-  function filteredNames() {
-    var names = repository.name;
-    return filteredNames === names.filter('Squirtle')
-  }
-  console.log(filteredNames);
 })();
 
 // Update to use one of the two functions returned by the IIFE in order to retrieve the repository array.
