@@ -1,8 +1,40 @@
+*:focus {
+  outline: 0 !important;
+}
+
 .nav {
   background-color: #fad61d;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.pokemonList {
+  list-style-type: none;
 }
 
 .navbar-brand {
   color: #000;
+  padding-left: 15px;
+  height: 75px;
   font-size: 2em;
+}
+
+.pokemonButton {
+  /* overwrites browser defaults and resets the border */
+  border: none;
+  display: inline-block;
+  width: 25%;
+  color: #fff;
+  background: #fc9802;
+  padding: 10px;
+  margin: 3px;
+  border-radius: 5px;
+  font-size: 1.5em;
+}
+
+button :hover,
+:focus {
+  cursor: pointer;
+  opacity: 0.8;
+  text-decoration: none;
 }
