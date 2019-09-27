@@ -29,12 +29,20 @@ var pokemonRepository = (function() {
     return repository;
   }
 
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+
   function addListItem(pokemon) {
     var button = document.createElement('button');
     button.innerText = pokemon;
     button.classList.add('pokemonButton');
     $element.appendChild(button);
+    button.addEventListener('click', function(showDetails) {
+      console.log(pokemon);
+    });
   }
+
   // Return an object with public funtions assigned as keys
   return {
     add: add,
@@ -43,14 +51,7 @@ var pokemonRepository = (function() {
   };
 })();
 
-pokemonRepository.add({
-  name: 'Pikachu',
-  height: 2,
-  types: ['Water', "Air"]
-});
-
 var $element = document.querySelector('ul');
-
 pokemonRepository.getAll().forEach(function(property) {
   var listItem = document.createElement('li');
   $element.appendChild(listItem);
