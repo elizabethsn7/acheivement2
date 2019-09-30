@@ -1,0 +1,18 @@
+html,
+body {
+  font-family: Arial, sans-serif;
+}
+
+.input-wrapper {
+  margin-bottom: 10px;
+}
+
+label {
+  display: inline-block;
+  min-width: 75px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+}
