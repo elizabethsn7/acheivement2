@@ -7,7 +7,7 @@ var pokemonRepository = (function() {
   function add(pokemon) {
     // Check if the typeof parameter is an object
     if (typeof pokemon === 'object') {
-      repository.push(pokemon);
+      repository.push(pokemon.name);
     }
   }
 
