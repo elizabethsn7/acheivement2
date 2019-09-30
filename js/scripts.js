@@ -7,7 +7,8 @@ var pokemonRepository = (function() {
   function add(pokemon) {
     // Check if the typeof parameter is an object
     if (typeof pokemon === 'object') {
-      repository.push(pokemon.name);
+      repository.push(pokemon);
+
     }
   }
 
@@ -25,7 +26,7 @@ var pokemonRepository = (function() {
     var $element = document.querySelector('ul');
     var listItem = document.createElement('li');
     var button = document.createElement('button');
-    button.innerText = pokemon;
+    button.innerText = pokemon.name;
     button.classList.add('pokemonButton');
     $element.appendChild(listItem);
     $element.appendChild(button);
