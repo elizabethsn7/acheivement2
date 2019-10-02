@@ -19,7 +19,8 @@
   font-size: 2em;
 }
 
-.pokemonButton {
+.pokemonButton,
+.modalButton {
   /* overwrites browser defaults and resets the border */
   border: none;
   display: inline-block;
@@ -41,6 +42,7 @@ button :hover,
   text-decoration: none;
 }
 
+/***  Modal Styling  **/
 #modal-container {
   position: fixed;
   padding: 20px;
