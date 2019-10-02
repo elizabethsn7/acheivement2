@@ -5,18 +5,18 @@ var pokemonRepository = (function() {
   // Make sure both getAll and add are defined separatetly
   //with the function keyword.
   function add(pokemon) {
-    repository.push(pokemon);
+      repository.push(pokemon);
   }
 
   function getAll() {
     return repository;
   }
 
-  function showDetails() {
-   pokemonRepository.loadDetails().then(function() {
-  });
-
-} // Closes showDetails
+  function showDetails(item) {
+    pokemonRepository.loadDetails(item).then(function() {
+      console.log(item);
+    });
+  }
 
   function addListItem(pokemon) {
     var $element = document.querySelector('ul');
@@ -53,8 +53,8 @@ var pokemonRepository = (function() {
       return response.json();
     }).then(function(details) {
       item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      item.types = Object.keys(details.types);
+        item.height = details.height;
+        item.types = Object.keys(details.types);
     }).catch(function(e) {
       console.error(e);
     });
@@ -65,19 +65,19 @@ var pokemonRepository = (function() {
     getAll: getAll,
     loadList: loadList,
     loadDetails: loadDetails,
-    addListItem: addListItem,
-    showDetails: showDetails
+    addListItem: addListItem
   };
 })();
 
 pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(pokemonRepository.addListItem);
 });
+
 // Modal
-function showModal(title, text) {
+function showModal (title, text) {
   var $modalContainer = document.querySelector('#modal-container');
-  $modalContainer.innerHTML = ' ';
-  var modal = document.createElement('div');
+  $modalContainer.innerHTML= ' ';
+  var modal =document.createElement('div');
   modal.classList.add('modal');
 
   // Add the modal content
@@ -105,7 +105,7 @@ function hideModal() {
   $modalContainer.classList.remove('is-visible');
 }
 
-document.querySelector('#show-modal').addEventListener('click', () => {
+document.querySelector('.pokemonList').addEventListener('click', () => {
   showModal('Append the current pokemons name here', 'this is the modal content that needs to be replaced with the pokemons info');
 });
 
@@ -117,9 +117,9 @@ window.addEventListener('keydown', (e) => {
   $modalContainer.addEventListener('click', (e) => {
     // Closes the modal if the user clicks directly on the overlay
     var target = e.target;
-
-    if (target === $modalContainer) {
+    if(target === $modalContainer) {
       hideModal();
     }
-  }); // Closes $modalContainer addEventListener target
-}) // Closes window event listener
+    console.log(target);
+  });
+})
