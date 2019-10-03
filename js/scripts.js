@@ -5,7 +5,7 @@ var pokemonRepository = (function() {
   // Make sure both getAll and add are defined separatetly
   //with the function keyword.
   function add(pokemon) {
-    repository.push(pokemon);
+      repository.push(pokemon);
   }
 
   function getAll() {
@@ -14,12 +14,11 @@ var pokemonRepository = (function() {
 
   function showDetails(item) {
     pokemonRepository.loadDetails(item).then(function() {
-
       // Modal
-      function showModal(title, text) {
+      function showModal (title, text) {
         var $modalContainer = document.querySelector('#modal-container');
-        $modalContainer.innerHTML = ' ';
-        var modal = document.createElement('div');
+        $modalContainer.innerHTML= ' ';
+        var modal =document.createElement('div');
         modal.classList.add('modal');
 
         // Add the modal content
@@ -29,13 +28,10 @@ var pokemonRepository = (function() {
         closeButtonElement.addEventListener('click', hideModal);
 
         var titleElement = document.createElement('h1');
-        titleElement.innerText = pokemon.name;
+        titleElement.innerText = title;
 
         var contentElement = document.createElement('p');
         contentElement.innerText = text;
-
-        // var imageElement = document.createElement('img');
-        // imageElement.src = imageUrl;
 
         modal.appendChild(closeButtonElement);
         modal.appendChild(titleElement);
@@ -43,32 +39,32 @@ var pokemonRepository = (function() {
         $modalContainer.appendChild(modal);
 
         $modalContainer.classList.add('is-visible');
-      }   // *****  Close showModal **** //
+
+        document.querySelector('.pokemonList').addEventListener('click', () => {
+          showModal('Title', 'text');
+        });
+        window.addEventListener('keydown', (e) => {
+          var $modalContainer = document.querySelector('#modal-container');
+          if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
+            hideModal();
+          }
+          $modalContainer.addEventListener('click', (e) => {
+            // Closes the modal if the user clicks directly on the overlay
+            var target = e.target;
+            if(target === $modalContainer) {
+              hideModal();
+            }
+            console.log(target);
+          });
+        })
+      }
 
       function hideModal() {
         var $modalContainer = document.querySelector('#modal-container');
         $modalContainer.classList.remove('is-visible');
-      }    // *****  Close hideModal **** //
-
-      document.querySelector('.pokemonList').addEventListener('click', () => {
-        showModal(titleElement, contentElement);
-      });
-      window.addEventListener('keydown', (e) => {
-        var $modalContainer = document.querySelector('#modal-container');
-        if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
-          hideModal();
-        }
-        $modalContainer.addEventListener('click', (e) => {
-          // Closes the modal if the user clicks directly on the overlay
-          var target = e.target;
-          if (target === $modalContainer) {
-            hideModal();
-          }
-          console.log(target);
-        });  // ***** Close $modalContainer ***** //
-      }) // ***** Close window addEventListener ***** //
-    });  // ***** Close pokeRepo loadDetails ***** //
-  } // ***** Close showDetails ***** //
+      }
+    });
+  }
 
   function addListItem(pokemon) {
     var $element = document.querySelector('ul');
@@ -80,11 +76,10 @@ var pokemonRepository = (function() {
     $element.appendChild(button);
     button.addEventListener('click', function(showDetails) {
       console.log(pokemon);
-      console.log(showDetails);
     });
   }
 
-  function loadList(item) {
+  function loadList() {
     return fetch(apiUrl).then(function(response) {
       return response.json();
     }).then(function(json) {
@@ -106,8 +101,8 @@ var pokemonRepository = (function() {
       return response.json();
     }).then(function(details) {
       item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      item.types = Object.keys(details.types);
+        item.height = details.height;
+        item.types = Object.keys(details.types);
     }).catch(function(e) {
       console.error(e);
     });
