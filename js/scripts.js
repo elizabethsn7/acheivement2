@@ -1,6 +1,6 @@
 var pokemonRepository = (function() {
   var repository = [];
-  var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=5';
+  var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
 
   function add(pokemon) {
     repository.push(pokemon);
@@ -12,9 +12,8 @@ var pokemonRepository = (function() {
 
   function showDetails(pokemon) {
     pokemonRepository.loadDetails(pokemon).then(function() {
-      document.querySelector('.pokemonList').addEventListener('click', () => {
-        showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
-      });
+      document.querySelector('.pokemonList').addEventListener('click',
+        showModal(pokemon.name, pokemon.height, pokemon.imageUrl));
     }); // ** closes (Promise?) ** //
   } //  ***** Closes showDetails ***** //
 
@@ -30,7 +29,7 @@ var pokemonRepository = (function() {
     button.addEventListener('click', function() {
       showDetails(pokemon);
     });
-  }
+  } // *** closes addListItem  *** //
 
   function loadList() {
     return fetch(apiUrl).then(function(response) {
