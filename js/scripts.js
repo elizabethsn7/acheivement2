@@ -10,6 +10,14 @@ var pokemonRepository = (function() {
     return repository;
   }
 
+  function showDetails(pokemon) {
+    pokemonRepository.loadDetails(pokemon).then(function() {
+      document.querySelector('.pokemonList').addEventListener('click', () => {
+        showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
+      });
+    }); // ** closes (Promise?) ** //
+  } //  ***** Closes showDetails ***** //
+
   function addListItem(pokemon) {
     var ulElement = document.querySelector('.pokemonList');
     var button = document.createElement('button');
@@ -20,7 +28,7 @@ var pokemonRepository = (function() {
     ulElement.appendChild(listItem);
     // **** Add Event listener  **** //
     button.addEventListener('click', function() {
-      showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
+      showDetails(pokemon);
     });
   }
 
@@ -69,7 +77,7 @@ pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(pokemonRepository.addListItem);
 });
 
-function showModal(title, text, image) {
+function showModal(title, text, pokeImage) {
   var $modalContainer = document.querySelector('#modal-container');
   //Clear existing modal conent
   $modalContainer.innerHTML = ' ';
@@ -86,11 +94,16 @@ function showModal(title, text, image) {
   titleElement.innerText = title;
 
   var contentElement = document.createElement('p');
-  contentElement.innerText = 'The pokemon ' + title + '\'s ' + 'height is ' + text;
+  contentElement.innerText = 'The pokemon ' + title + '\'s '+ 'height is ' + text;
+
+
+  var contentImage = document.createElement('img');
+  contentImage.src = pokeImage;
 
   modal.appendChild(closeButtonElement);
   modal.appendChild(titleElement);
   modal.appendChild(contentElement);
+  modal.appendChild(contentImage);
   $modalContainer.appendChild(modal);
 
   $modalContainer.classList.add('is-visible');
@@ -101,9 +114,13 @@ function hideModal() {
   $modalContainer.classList.remove('is-visible');
 }
 
+// document.querySelector('#show-modal').addEventListener('click', () => {
+//   showModal('Modal Title', 'This is the modal content.');
+// });
+
 window.addEventListener('keydown', (e) => {
   var $modalContainer = document.querySelector('#modal-container');
   if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
     hideModal();
   }
-})
+});
